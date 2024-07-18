@@ -1,0 +1,564 @@
+I have a web page (index.html, directResultsEntry.html, resultsFileAttachment.html, combiningDiscussion.html, style.css and script.js) that creates prompts for chatbots to discuss research results and compare them with previous studies. As the user, I'm the one who enters the results and previous studies. I can input results by copying and pasting or uploading a file, and I can provide previous studies in PDF or PIPOR-AN format.
+I'm looking to change the appearance of the home page while keeping all the other functionality the same. 
+I want to modify the relevant codes so that we get the following modifications:
+
+I want Heading "Improving 'Discussions' with Tailored Prompts" to appear above Paragraph 1 in the same font, font size, and font color.
+Heading "Step-by-Step Guide" should appear above the second paragraph in the same font, font size, and font color.
+
+1/index.html
+"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Prompt Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Custom Prompt Generator</h1>
+        <p class="subheading">Conceptualized by A.may and crafted by Chatgpt</p>
+        
+        <div class="tabs">
+            <button class="tab-button" onclick="window.location.href='directResultsEntry.html'">Direct Results Entry</button>
+            <button class="tab-button" onclick="window.location.href='resultsFileAttachment.html'">Results File Attachment</button>
+            <button class="tab-button" onclick="window.location.href='combiningDiscussion.html'">Combining Discussion</button>
+        </div>
+
+        <div class="content-container">
+            <div class="image-container">
+                <img src="https://i.ibb.co/34FYfsy/Presentation.png" alt="Presentation">
+            </div>
+            <div class="text-container">
+                <p class="paragraph">The purpose of creating this web page is to assist researchers in generating structured and comprehensive prompts for discussing their study results with a chatbot. Often, researchers need to analyze and present their findings in the context of existing scientific literature. This can be a time-consuming and challenging process, especially when aiming to adhere to the formal style and structure required by academic publications. The Custom Prompt Generator web page streamlines this process by allowing researchers to input their results directly or via a file attachment and then generate a detailed prompt for discussing these results. The generated prompt includes references to specified scientific papers, ensuring that the discussion is well-supported and aligns with the standards of scientific discourse.</p>
+                <p class="paragraph">To use this web page, researchers can follow a few simple steps. First, select the appropriate tab based on how they wish to enter their results. The "Direct Results Entry" tab allows users to manually input their findings, while the "Results File Attachment" tab lets users upload a file containing their results. After entering or uploading the results, researchers need to specify the range of scientific papers they wish to reference in the discussion. This is done by entering the starting and ending values for the paper range. Once this information is provided, the "Generate Prompt" button will become active. Clicking this button generates a prompt tailored to the entered results and specified papers. Researchers can then copy this prompt and use it to engage the chatbot in a detailed discussion of their findings. The "Combining Discussion" tab allows for the integration of multiple discussion versions into one comprehensive prompt, providing a cohesive and thorough analysis of the results. By using this web page, researchers can efficiently create high-quality prompts that facilitate insightful and structured academic discussions.</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+"
+2/directResultsEntry.html
+"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Direct Results Entry - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="right-column">
+      <h2>Direct Results Entry</h2>
+      <p>Use this tab to directly enter the results of your study and generate a prompt for discussing these results with reference to a set of scientific papers.</p>
+      <form id="promptFormDirect">
+        <label for="resultsDirect">Enter your results:</label>
+        <textarea id="resultsDirect" name="resultsDirect" rows="10" placeholder="Paste your results here..."></textarea>
+
+        <label for="startDirect">Enter the starting value for N:</label>
+        <input type="number" id="startDirect" name="startDirect" placeholder="e.g., 0" oninput="activateGenerateButton('Direct')">
+        <p>Start value for the range of papers (e.g., if you have papers from paper-0 to paper-19, start value is 0).</p>
+
+        <label for="endDirect">Enter the final value for N:</label>
+        <input type="number" id="endDirect" name="endDirect" placeholder="e.g., 19" oninput="activateGenerateButton('Direct')">
+        <p>End value for the range of papers (e.g., if you have papers from paper-0 to paper-19, end value is 19).</p>
+
+        <div class="button-group">
+          <button type="button" id="generateButtonDirect" onclick="generatePrompt('Direct')" disabled><i class="fas fa-cogs"></i> Generate Prompt</button>
+          <button type="button" onclick="resetForm('Direct')"><i class="fas fa-redo-alt"></i> Reset</button>
+          <button type="button" id="copyButtonDirect" onclick="copyPrompt('Direct')" disabled><i class="fas fa-copy"></i> Copy Prompt</button>
+          <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+      </form>
+
+      <h2>Generated Prompt</h2>
+      <pre id="generatedPromptDirect"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+"
+3/resultsFileAttachment.html
+"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Results File Attachment - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="right-column">
+      <h2>Results File Attachment</h2>
+      <p>Use this tab if your study results are saved in a separate file. Provide the file name and generate a prompt for discussing these results with reference to a set of scientific papers.</p>
+      <form id="promptFormFile">
+        <label for="resultsFile">Enter the name of the results file:</label>
+        <input type="text" id="resultsFile" name="resultsFile" placeholder="e.g., results.pdf">
+
+        <label for="startFile">Enter the starting value for N:</label>
+        <input type="number" id="startFile" name="startFile" placeholder="e.g., 0" oninput="activateGenerateButton('File')">
+        <p>Start value for the range of papers (e.g., if you have papers from paper-0 to paper-19, start value is 0).</p>
+
+        <label for="endFile">Enter the final value for N:</label>
+        <input type="number" id="endFile" name="endFile" placeholder="e.g., 19" oninput="activateGenerateButton('File')">
+        <p>End value for the range of papers (e.g., if you have papers from paper-0 to paper-19, end value is 19).</p>
+
+        <div class="button-group">
+          <button type="button" id="generateButtonFile" onclick="generatePrompt('File')" disabled><i class="fas fa-cogs"></i> Generate Prompt</button>
+          <button type="button" onclick="resetForm('File')"><i class="fas fa-redo-alt"></i> Reset</button>
+          <button type="button" id="copyButtonFile" onclick="copyPrompt('File')" disabled><i class="fas fa-copy"></i> Copy Prompt</button>
+          <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+      </form>
+
+      <h2>Generated Prompt</h2>
+      <pre id="generatedPromptFile"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+"
+4/combiningDiscussion.html
+"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combining Discussion - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="right-column">
+      <h2>Combining Discussion</h2>
+      <p>Use this tab to combine all versions of the discussion of results into one comprehensive version that brings together all the information, ideas, and data derived from the provided scientific papers.</p>
+      <form id="promptFormCombining">
+        <label for="startCombining">Enter the starting value for N:</label>
+        <input type="number" id="startCombining" name="startCombining" placeholder="e.g., 0" oninput="activateGenerateButton('Combining')">
+        <p>Start value for the range of papers (e.g., if you have papers from paper-0 to paper-19, start value is 0).</p>
+
+        <label for="endCombining">Enter the final value for N:</label>
+        <input type="number" id="endCombining" name="endCombining" placeholder="e.g., 19" oninput="activateGenerateButton('Combining')">
+        <p>End value for the range of papers (e.g., if you have papers from paper-0 to paper-19, end value is 19).</p>
+
+        <div class="checkbox-group">
+          <label for="resultsDirectCheckbox">
+            <input type="checkbox" id="resultsDirectCheckbox" name="resultsDirectCheckbox" onchange="toggleResultsInput('direct')">
+            <span>Direct Results Entry</span>
+          </label>
+          <label for="resultsFileCheckbox">
+            <input type="checkbox" id="resultsFileCheckbox" name="resultsFileCheckbox" onchange="toggleResultsInput('file')">
+            <span>Results File Attachment</span>
+          </label>
+        </div>
+
+        <div id="resultsDirectInput" style="display:none;">
+          <label for="resultsCombining">Enter your results:</label>
+          <textarea id="resultsCombining" name="resultsCombining" rows="10" placeholder="Paste your results here..."></textarea>
+        </div>
+
+        <div id="resultsFileInput" style="display:none;">
+          <label for="resultsFileCombining">Enter the name of the results file:</label>
+          <input type="text" id="resultsFileCombining" name="resultsFileCombining" placeholder="e.g., results.pdf">
+        </div>
+
+        <div class="button-group">
+          <button type="button" id="generateButtonCombining" onclick="generatePrompt('Combining')" disabled><i class="fas fa-cogs"></i> Generate Prompt</button>
+          <button type="button" onclick="resetForm('Combining')"><i class="fas fa-redo-alt"></i> Reset</button>
+          <button type="button" id="copyButtonCombining" onclick="copyPrompt('Combining')" disabled><i class="fas fa-copy"></i> Copy Prompt</button>
+          <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+      </form>
+
+      <h2>Generated Prompt</h2>
+      <pre id="generatedPromptCombining"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+"
+5/script.js
+"
+function openTab(tabName) {
+    const tabs = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+    }
+    document.getElementById(tabName).style.display = 'block';
+}
+
+function activateGenerateButton(type) {
+    const start = document.getElementById(`start${type}`).value;
+    const end = document.getElementById(`end${type}`).value;
+    const generateButton = document.getElementById(`generateButton${type}`);
+
+    if (start !== '' && end !== '') {
+        generateButton.disabled = false;
+    } else {
+        generateButton.disabled = true;
+    }
+}
+
+function createParagraph(start, end) {
+    const words = [];
+    for (let i = start; i <= end; i++) {
+        words.push(`"paper-${i}.pdf"`);
+    }
+    return words.join(', ');
+}
+
+function createReferenceList(start, end) {
+    const references = [];
+    for (let i = start; i <= end; i++) {
+        references.push(`Paper ${i}: [Insert the complete reference details here]`);
+    }
+    return references;
+}
+
+function toggleResultsInput(type) {
+    const directInput = document.getElementById('resultsDirectInput');
+    const fileInput = document.getElementById('resultsFileInput');
+    const directCheckbox = document.getElementById('resultsDirectCheckbox');
+    const fileCheckbox = document.getElementById('resultsFileCheckbox');
+
+    if (type === 'direct') {
+        directInput.style.display = 'block';
+        fileInput.style.display = 'none';
+        fileCheckbox.checked = false; 
+        fileCheckbox.disabled = true; 
+    } else if (type === 'file') {
+        directInput.style.display = 'none';
+        fileInput.style.display = 'block';
+        directCheckbox.checked = false; 
+        directCheckbox.disabled = true; 
+    }
+}
+
+function generatePrompt(type) {
+    const start = parseInt(document.getElementById(`start${type}`).value);
+    const end = parseInt(document.getElementById(`end${type}`).value);
+
+    if (isNaN(start) || isNaN(end) || start > end) {
+        alert('Please enter valid start and end values.');
+        return;
+    }
+
+    const paperNames = createParagraph(start, end);
+    const references = createReferenceList(start, end);
+
+    let prompt = '';
+
+    if (type === 'Direct') {
+        const results = document.getElementById('resultsDirect').value.trim();
+
+        prompt = `
+[prompt]
+Discussing Results with Papers-${start} to Paper-${end}
+I want to discuss the results I obtained, specifically regarding the following points, in light of the findings from other researchers as recorded in their scientific papers. The key results from my study are:
+
+${results}
+
+Please analyze and discuss these results, using the findings and data presented in the scientific papers named ${paperNames} to support your discussion. 
+
+Ensure that the discussion is consistent with the style used in the "Discussion" sections of scientific medical journals, adhering to the applicable principles and rules of the field.
+
+Important: Do not search the internet for additional sources. Only analyze and reference the provided papers. Include in-text citations in the format [Paper X, paragraph X] and a reference list entry for each of these papers in the discussion as shown below.
+
+References:
+${references.join('\n')}
+`;
+    } else if (type === 'File') {
+        const resultsFile = document.getElementById('resultsFile').value.trim();
+
+        prompt = `
+[prompt]
+Discussing Results with Papers-${start} to Paper-${end}
+I want to discuss the results I obtained, specifically regarding the following points, in light of the findings from other researchers as recorded in their scientific papers. The results that we want to discuss are saved in the attached file ${resultsFile}.
+
+Please analyze and discuss these results, using the findings and data presented in the scientific papers named ${paperNames} to support your discussion. 
+
+Ensure that the discussion is consistent with the style used in the "Discussion" sections of scientific medical journals, adhering to the applicable principles and rules of the field.
+
+Important: Do not search the internet for additional sources. Only analyze and reference the provided papers. Include in-text citations in the format [Paper X, paragraph X] and a reference list entry for each of these papers in the discussion as shown below.
+
+References:
+${references.join('\n')}
+`;
+    } else if (type === 'Combining') {
+        let results = '';
+        const directCheckbox = document.getElementById('resultsDirectCheckbox');
+        const fileCheckbox = document.getElementById('resultsFileCheckbox');
+
+        if (directCheckbox.checked) {
+            results = document.getElementById('resultsCombining').value.trim();
+        } else if (fileCheckbox.checked) {
+            results = document.getElementById('resultsFileCombining').value.trim();
+        }
+
+        prompt = `
+[prompt]
+Combining Discussion Versions from All Sets of Papers
+I want to combine all versions of the discussion of results into one comprehensive version that brings together all the information, ideas, and data derived from the scientific papers provided. ${directCheckbox.checked ? 'The key results from my study are:' : `The results that we want to discuss are saved in the attached file ${results}`};
+
+${directCheckbox.checked ? results : ''}
+
+Ensure that the discussion is consistent with the style used in the "Discussion" sections of scientific medical journals, adhering to the applicable principles and rules of the field.
+
+Instructions:
+
+Combine Discussions: Merge the discussions from each version (based on different sets of papers) into one comprehensive discussion.
+Use Provided Papers Only: Analyze and reference only the provided papers in each set:
+
+${references.join('\n')}
+
+Use the findings and data presented in the provided papers from each set to support the discussion. Ensure that the discussion adheres to the principles and rules of scientific medical journals.
+`;
+    }
+
+    document.getElementById(`generatedPrompt${type}`).innerText = prompt;
+
+    const copyButton = document.getElementById(`copyButton${type}`);
+    copyButton.disabled = false;
+}
+
+function resetForm(type) {
+    document.getElementById(`promptForm${type}`).reset();
+    document.getElementById(`generatedPrompt${type}`).innerText = '';
+
+    const directInput = document.getElementById('resultsDirectInput');
+    const fileInput = document.getElementById('resultsFileInput');
+
+    directInput.style.display = 'none';
+    fileInput.style.display = 'none';
+
+    const generateButton = document.getElementById(`generateButton${type}`);
+    generateButton.disabled = true;
+    const copyButton = document.getElementById(`copyButton${type}`);
+    copyButton.disabled = true;
+
+    // Enable checkboxes when resetting the form
+    const directCheckbox = document.getElementById('resultsDirectCheckbox');
+    const fileCheckbox = document.getElementById('resultsFileCheckbox');
+
+    directCheckbox.disabled = false;
+    fileCheckbox.disabled = false;
+}
+
+function copyPrompt(type) {
+    const promptText = document.getElementById(`generatedPrompt${type}`).innerText;
+    navigator.clipboard.writeText(promptText).then(() => {
+        alert('Prompt copied to clipboard!');
+    }, (err) => {
+        alert('Failed to copy prompt: ', err);
+    });
+}
+"
+6/style.css
+"
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF3E2;
+    color: #5D3A1A;
+	font-size: 12px
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    text-align: left;
+}
+
+h1 {
+    font-size: 3em;
+    color: #5D3A1A;
+    margin-bottom: 0;
+	text-align: center;
+}
+
+.subheading {
+    font-size: 1em;
+    color: #5D3A1A;
+    margin-top: 5px;
+	text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #631414;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.tab-button:hover {
+    background-color: #434190;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.image-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-container {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.paragraph {
+    flex: 1;
+    text-align: justify;
+    padding: 0 10px;
+}
+
+/* Existing styles remain unchanged */
+.tab-content-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content h2 {
+    margin-top: 0;
+}
+
+textarea, input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+	font-family: 'Roboto', sans-serif;
+	color: #5D3A1A;
+ }
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between; /* Distribute buttons evenly */
+}
+
+#generateButtonDirect, #generateButtonFile, #generateButtonCombining {
+    background-color: #9d2a9a;
+    color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+
+#generateButtonDirect:disabled, #generateButtonFile:disabled, #generateButtonCombining:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+	border: none;
+	border-radius: 5px;
+}
+
+#copyButtonDirect, #copyButtonFile, #copyButtonCombining {
+    background-color: #003cff;
+    color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+
+#copyButtonDirect:disabled, #copyButtonFile:disabled, #copyButtonCombining:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+	border: none;
+	border-radius: 5px;
+}
+
+button:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+/* Back to Home Button Styles */
+button[onclick*="index.html"] { 
+    background-color: #80C878; /* Light green */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button[onclick*="index.html"]:hover {
+    opacity: 0.8;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center; /* Align items to the center */
+    gap: 20px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center; /* Align items to the center */
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px; /* Add some space between checkbox and text */
+    width: 25px; /* Make the checkboxes bigger */
+    height: 25px; /* Make the checkboxes bigger */
+    border-radius: 5px; /* Round the corners */
+}
+
+.checkbox-group label span {
+    font-weight: bold; /* Make the text bold */
+    color: #c0392b; /* Set the font color to a dark red */
+}
+
+/* Style for the `pre` tag */
+pre {
+  white-space: pre-wrap; /* Preserve line breaks and wrap long lines */
+  word-wrap: break-word; /* Allow breaking long words */
+}
+"

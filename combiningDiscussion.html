@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combining Discussion - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="right-column">
+      <h2>Combining Discussion</h2>
+      <p>Use this tab to combine all versions of the discussion of results into one comprehensive version that brings together all the information, ideas, and data derived from the provided scientific papers.</p>
+      <form id="promptFormCombining">
+        <label for="startCombining">Enter the starting value for N:</label>
+        <input type="number" id="startCombining" name="startCombining" placeholder="e.g., 0" oninput="activateGenerateButton('Combining')">
+        <p>Start value for the range of papers (e.g., if you have papers from paper-0 to paper-19, start value is 0).</p>
+
+        <label for="endCombining">Enter the final value for N:</label>
+        <input type="number" id="endCombining" name="endCombining" placeholder="e.g., 19" oninput="activateGenerateButton('Combining')">
+        <p>End value for the range of papers (e.g., if you have papers from paper-0 to paper-19, end value is 19).</p>
+
+        <div class="checkbox-group">
+          <label for="resultsDirectCheckbox">
+            <input type="checkbox" id="resultsDirectCheckbox" name="resultsDirectCheckbox" onchange="toggleResultsInput('direct')">
+            <span>Direct Results Entry</span>
+          </label>
+          <label for="resultsFileCheckbox">
+            <input type="checkbox" id="resultsFileCheckbox" name="resultsFileCheckbox" onchange="toggleResultsInput('file')">
+            <span>Results File Attachment</span>
+          </label>
+        </div>
+
+        <div id="resultsDirectInput" style="display:none;">
+          <label for="resultsCombining">Enter your results:</label>
+          <textarea id="resultsCombining" name="resultsCombining" rows="10" placeholder="Paste your results here..."></textarea>
+        </div>
+
+        <div id="resultsFileInput" style="display:none;">
+          <label for="resultsFileCombining">Enter the name of the results file:</label>
+          <input type="text" id="resultsFileCombining" name="resultsFileCombining" placeholder="e.g., results.pdf">
+        </div>
+
+        <div class="button-group">
+          <button type="button" id="generateButtonCombining" onclick="generatePrompt('Combining')" disabled><i class="fas fa-cogs"></i> Generate Prompt</button>
+          <button type="button" onclick="resetForm('Combining')"><i class="fas fa-redo-alt"></i> Reset</button>
+          <button type="button" id="copyButtonCombining" onclick="copyPrompt('Combining')" disabled><i class="fas fa-copy"></i> Copy Prompt</button>
+          <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+      </form>
+
+      <h2>Generated Prompt</h2>
+      <pre id="generatedPromptCombining"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

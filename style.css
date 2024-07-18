@@ -1,0 +1,179 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF3E2;
+    color: #5D3A1A;
+	font-size: 12px
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    text-align: left;
+}
+
+h1 {
+    font-size: 3em;
+    color: #5D3A1A;
+    margin-bottom: 0;
+	text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #5D3A1A;
+    margin-bottom: 10px;
+	text-align: left;
+}
+
+.subheading {
+    font-size: 1em;
+    color: #5D3A1A;
+    margin-top: 5px;
+	text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #631414;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.tab-button:hover {
+    background-color: #434190;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.image-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.paragraph {
+    flex: 1;
+    text-align: justify;
+    padding: 0 10px;
+}
+
+/* Existing styles remain unchanged */
+.tab-content-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content h2 {
+    margin-top: 0;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+	font-family: 'Roboto', sans-serif;
+	color: #5D3A1A;
+ }
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between; /* Distribute buttons evenly */
+}
+
+#generateButtonDirect, #generateButtonFile, #generateButtonCombining {
+    background-color: #9d2a9a;
+    color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+
+#generateButtonDirect:disabled, #generateButtonFile:disabled, #generateButtonCombining:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+	border: none;
+	border-radius: 5px;
+}
+
+#copyButtonDirect, #copyButtonFile, #copyButtonCombining {
+    background-color: #003cff;
+    color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+
+#copyButtonDirect:disabled, #copyButtonFile:disabled, #copyButtonCombining:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+	border: none;
+	border-radius: 5px;
+}
+
+button:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+/* Back to Home Button Styles */
+button[onclick*="index.html"] {
+    background-color: #31a24c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[onclick*="index.html"]:hover {
+    background-color: #27903e;
+}
+/* Style for the `pre` tag */
+pre {
+  white-space: pre-wrap; /* Preserve line breaks and wrap long lines */
+  word-wrap: break-word; /* Allow breaking long words */
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px; /* Add some space between checkbox and text */
+    width: 25px; /* Make the checkboxes bigger */
+    height: 25px; /* Make the checkboxes bigger */
+    border-radius: 5px; /* Round the corners */
+}

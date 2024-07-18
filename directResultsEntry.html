@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Direct Results Entry - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="right-column">
+      <h2>Direct Results Entry</h2>
+      <p>Use this tab to directly enter the results of your study and generate a prompt for discussing these results with reference to a set of scientific papers.</p>
+      <form id="promptFormDirect">
+        <label for="resultsDirect">Enter your results:</label>
+        <textarea id="resultsDirect" name="resultsDirect" rows="10" placeholder="Paste your results here..."></textarea>
+
+        <label for="startDirect">Enter the starting value for N:</label>
+        <input type="number" id="startDirect" name="startDirect" placeholder="e.g., 0" oninput="activateGenerateButton('Direct')">
+        <p>Start value for the range of papers (e.g., if you have papers from paper-0 to paper-19, start value is 0).</p>
+
+        <label for="endDirect">Enter the final value for N:</label>
+        <input type="number" id="endDirect" name="endDirect" placeholder="e.g., 19" oninput="activateGenerateButton('Direct')">
+        <p>End value for the range of papers (e.g., if you have papers from paper-0 to paper-19, end value is 19).</p>
+
+        <div class="button-group">
+          <button type="button" id="generateButtonDirect" onclick="generatePrompt('Direct')" disabled><i class="fas fa-cogs"></i> Generate Prompt</button>
+          <button type="button" onclick="resetForm('Direct')"><i class="fas fa-redo-alt"></i> Reset</button>
+          <button type="button" id="copyButtonDirect" onclick="copyPrompt('Direct')" disabled><i class="fas fa-copy"></i> Copy Prompt</button>
+          <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+      </form>
+
+      <h2>Generated Prompt</h2>
+      <pre id="generatedPromptDirect"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ This web page generates prompts for chatbots to discuss and compare research res
 ## Usage
 
 1. **Open the Web Page**:
-    - Open : https://may01dz.github.io/Research-Results-Prompt-Generator/
+    - Open : https://may01dz.github.io/aiprompts/
 
 2. **Input Results**:
     - Copy and paste your research results into the text input field, or upload a file containing your results.
